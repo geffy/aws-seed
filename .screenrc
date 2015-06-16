@@ -1,0 +1,60 @@
+# see http://www4.informatik.uni-erlangen.de/~jnweiger/screen-faq.html
+# support color X terminals
+termcap  xterm 'XT:AF=\E[3%dm:AB=\E[4%dm:AX'
+terminfo xterm 'XT:AF=\E[3%p1%dm:AB=\E[4%p1%dm:AX'
+termcapinfo xterm 'XT:AF=\E[3%p1%dm:AB=\E[4%p1%dm:AX:hs:ts=\E]2;:fs=\007:ds=\E]2;screen\007'
+termcap  xtermc 'XT:AF=\E[3%dm:AB=\E[4%dm:AX'
+terminfo xtermc 'XT:AF=\E[3%p1%dm:AB=\E[4%p1%dm:AX'
+termcapinfo xtermc 'XT:AF=\E[3%p1%dm:AB=\E[4%p1%dm:AX:hs:ts=\E]2;:fs=\007:ds=\E]2;screen\007'
+
+term screen-256color
+#termcapinfo xterm|xterms|xs|rxvt ti@:te@
+
+defutf8 on
+utf8 on on
+
+# auto-screen support; see http://taint.org/wk/RemoteLoginAutoScreen
+# detach on hangup
+backtick 1 60 60 $HOME/bin/get_freemem
+
+unsetenv SSH_AUTH_SOCK
+setenv SSH_AUTH_SOCK $HOME/ssh_auth.sock
+
+autodetach on
+# no startup msg
+startup_message off
+# always use a login shell
+shell -$SHELL
+# auto-log
+logfile $HOME/lib/screen-logs/%Y%m%d-%n.log
+deflog on
+defscrollback 40000
+vbell off
+
+
+bindkey -k k2 next
+bindkey -k k1 prev
+
+bindkey ^[[1;5C next 
+bindkey ^[[1;5D prev
+
+bindkey "^[[5;2~" eval "copy" "stuff ^u"
+bindkey -m "^[[5;2~" stuff ^u
+bindkey -m "^[[6;2~" stuff ^d
+
+# Scroll up
+bindkey ^[[1;2A eval "copy" "stuff k"
+bindkey -m ^[[2;5A stuff k
+bindkey -m ^[[1;2B stuff j
+
+
+# Scroll up
+#bindkey ^[[1;2A stuff ^b
+#bindkey ^[[1;2B stuff k
+
+
+
+shelltitle 'sh       '
+
+hardstatus alwayslastline 
+hardstatus string '%{gk}[ %{G}%H %{g}]%{KK} %{Kw}[%= %{Kw}%-w%{Bw}%{Yk}[%{=b kY}%n* %t%{= kY}]%{wK}%+w%{wK} %= ]%{KK} %{=b kY}[ %{Y}%l ] [ %1 ]'
