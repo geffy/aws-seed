@@ -11,6 +11,7 @@ sudo update-alternatives --set liblapack.so.3 \
     /usr/lib/atlas-base/atlas/liblapack.so.3
 
 sudo apt-get install python-matplotlib
+sudo apt-get install pkg-config
 
 sudo apt-get install libblas3gf libblas-doc libblas-dev liblapack3gf liblapack-doc liblapack-dev
 sudo apt-get install libpng-dev libjpeg8-dev libfreetype6-dev
