@@ -20,6 +20,5 @@ pip install --user --install-option="--prefix=" -U numpy scipy pandas cython
 pip install --user --install-option="--prefix=" -U matplotlib
 
 pip install --user --install-option="--prefix=" -U scikit-learn
-pip install "ipython[notebook]"
+pip install jupyter
 
-ipython profile create dahaka
